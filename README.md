@@ -437,6 +437,8 @@ it across versions or machines, because Draw Things does not.
 
 The project code, original documentation and committed example images are
 released under the [MIT License](LICENSE). Model weights are not included.
+Licensing scope and external-program notes are collected in
+[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
 Every external component's licence is recorded in
 [`config/models.json`](config/models.json) with the source it was read from,

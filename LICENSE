@@ -19,18 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-This licence covers the source code, original documentation and original
-documentation assets in this repository, including the example images under
-docs/assets/examples.
-
-It does not cover, and this repository does not redistribute, any model
-weights. Those are downloaded at install time from their own sources and carry
-their own licences, which are recorded per-component in config/models.json and
-explained in docs/MODELS.md.
-
-Draw Things and draw-things-cli are separate programs under GPL-3.0-or-later.
-This project invokes draw-things-cli as an external process and does not link
-against it or redistribute it.
