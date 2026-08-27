@@ -1,0 +1,59 @@
+{
+  "name": "local-photo-ai-m5",
+  "version": "0.1.0",
+  "description": "On-device natural photography generation for Apple Silicon. Draw Things + Z-Image Turbo behind one agent-facing tool.",
+  "license": "MIT",
+  "homepage": "https://github.com/matheusbgodoi/local-photo-ai-m5#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheusbgodoi/local-photo-ai-m5.git"
+  },
+  "bugs": {
+    "url": "https://github.com/matheusbgodoi/local-photo-ai-m5/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22.6.0"
+  },
+  "bin": {
+    "local-photo": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": "./dist/core/index.js",
+    "./mcp": "./dist/mcp/server.js"
+  },
+  "files": [
+    "dist",
+    "config",
+    "scripts"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/cli/index.js dist/mcp/server.js",
+    "clean": "rm -rf dist",
+    "dev": "tsc -p tsconfig.json --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "check": "npm run build && npm test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "sharp": "0.35.3",
+    "typebox": "1.3.7",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.1",
+    "typescript": "5.9.3"
+  },
+  "optionalDependencies": {},
+  "pi": {
+    "extensions": [
+      "./dist/pi/index.js"
+    ]
+  },
+  "localPhoto": {
+    "optionalTools": {
+      "playwright": "1.62.1"
+    }
+  }
+}

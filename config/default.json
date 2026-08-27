@@ -1,0 +1,36 @@
+{
+  "$comment": "Shipped defaults. User overrides live in <state>/config.json and win over these. The i8x default is the on-machine benchmark verdict for Apple M5 (see docs/BENCHMARK.md); `local-photo benchmark --suite variants --apply <id>` re-decides it for other hardware.",
+  "schema": 1,
+  "model": {
+    "id": "z-image-turbo",
+    "variant": "i8x",
+    "steps": 8,
+    "guidance": 1,
+    "sampler": null,
+    "baseSize": 1024,
+    "sizeStride": 64
+  },
+  "lora": {
+    "id": null,
+    "enabled": false,
+    "strength": 0.5
+  },
+  "$comment_upscale": "Lanczos 1.5x is the default delivery path: it is a pure resample, so it invents nothing and cannot invent artefacts (docs/BENCHMARK.md#upscaling--lanczos-vs-real-esrgan measured it at ~0.4 s and indistinguishable from the source on elderly skin). The unscaled render is always kept next to the delivered file as <name>.raw.<ext>. Generative upscalers stay opt-in. Turn the pass off with --upscale off.",
+  "upscale": {
+    "mode": "final",
+    "upscaler": "lanczos",
+    "scale": 1.5
+  },
+  "finish": {
+    "enabled": false,
+    "grain": 0.2,
+    "sharpen": 0.3,
+    "tone": 0
+  },
+  "output": {
+    "format": "jpg",
+    "quality": 92,
+    "metadata": true
+  },
+  "preset": "natural"
+}

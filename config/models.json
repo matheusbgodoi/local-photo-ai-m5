@@ -1,0 +1,353 @@
+{
+  "$comment": "Component manifest. Licences are recorded from the primary source (HuggingFace model card metadata / Civitai API permission flags) and are NOT guessed. commercial_use_verified=false means we could not confirm it, and such a component must never become part of the production pipeline. See docs/MODELS.md.",
+  "schema": 1,
+  "verified_at": "2026-08-16",
+  "generators": [
+    {
+      "id": "z-image-turbo",
+      "name": "Z-Image Turbo 1.0",
+      "family": "z-image",
+      "source": "Draw Things official model catalog",
+      "upstream": "https://huggingface.co/Tongyi-MAI/Z-Image-Turbo",
+      "license": "Apache-2.0",
+      "license_source": "HuggingFace model card metadata (license: apache-2.0)",
+      "commercial_use_verified": true,
+      "default_variant": "i8x",
+      "variants": [
+        {
+          "id": "q8p",
+          "file": "z_image_turbo_1.0_q8p.ckpt",
+          "catalog_name": "Z Image Turbo 1.0",
+          "quantisation": "8-bit palettised",
+          "catalog_source": "official",
+          "sha256": "fb2f636c4f310c092fd87b6c07aabb1f4549fd4d74b66b09a5d034c95da655e6",
+          "download_url": "https://static.libnnc.org/z_image_turbo_1.0_q8p.ckpt",
+          "size_gb": 5.94
+        },
+        {
+          "id": "i8x",
+          "file": "z_image_turbo_1.0_i8x.ckpt",
+          "catalog_name": "Z Image Turbo 1.0 (8-bit S)",
+          "quantisation": "8-bit S",
+          "catalog_source": "official",
+          "sha256": "1f12425e76cc525de20d8047aac681949d964c986c59dca8615b17ce7601ce29",
+          "download_url": "https://static.libnnc.org/z_image_turbo_1.0_i8x.ckpt",
+          "size_gb": 5.76,
+          "selected_reason": "Chosen by on-machine benchmark: quality indistinguishable from q8p and q6p, 29% faster than q8p, lower peak memory. The 8-bit S build uses a fused int8 matmul and M5 enables Metal Quantized Attention by default."
+        },
+        {
+          "id": "q6p",
+          "file": "z_image_turbo_1.0_q6p.ckpt",
+          "catalog_name": "Z Image Turbo 1.0 (6-bit)",
+          "quantisation": "6-bit palettised",
+          "catalog_source": "official",
+          "sha256": "252683bda4661be9c64d94e718c2a9c36a6217867464ca09d03db7013a45f20f",
+          "download_url": "https://static.libnnc.org/z_image_turbo_1.0_q6p.ckpt",
+          "size_gb": 4.53
+        },
+        {
+          "id": "f16",
+          "file": "z_image_turbo_1.0_f16.ckpt",
+          "catalog_name": "Z Image Turbo 1.0 (Exact)",
+          "quantisation": "float16 (exact)",
+          "catalog_source": "community",
+          "sha256": "6d90c3f0342410a747396ae7b7dedfb03caa4621ee426744793fc57e60766c52",
+          "download_url": "https://static.libnnc.org/z_image_turbo_1.0_f16.ckpt",
+          "size_gb": 11.49,
+          "companions": [
+            {
+              "file": "qwen_3_vl_4b_instruct_f16.ckpt",
+              "role": "text encoder (f16 only)",
+              "size_gb": 8.06,
+              "sha256": "7ba2e5a8714f228bb12d2765779040bb20bc19764d0173d8daab952458f09c8a",
+              "download_url": "https://static.libnnc.org/qwen_3_vl_4b_instruct_f16.ckpt"
+            }
+          ]
+        }
+      ],
+      "companions": [
+        {
+          "file": "qwen_3_vl_4b_instruct_q8p.ckpt",
+          "role": "text encoder",
+          "size_gb": 4.53,
+          "sha256": "81bb4dfdeaa101a6948174ca827f7ebec0c8864f1f878f91231a7446ce96a9e2",
+          "download_url": "https://static.libnnc.org/qwen_3_vl_4b_instruct_q8p.ckpt",
+          "size_bytes": 4535328768
+        },
+        {
+          "file": "flux_1_vae_f16.ckpt",
+          "role": "autoencoder",
+          "size_gb": 0.17,
+          "sha256": "453d09645419d1ffc2f641e4a4c6ccf75f69c7215938a285e474ece3762fe293",
+          "download_url": "https://static.libnnc.org/flux_1_vae_f16.ckpt",
+          "size_bytes": 167870464
+        }
+      ],
+      "upstream_recommended": {
+        "steps": 9,
+        "guidance_scale_diffusers": 0,
+        "samplers_supported": [
+          "Euler A Trailing",
+          "DPM++ SDE Trailing",
+          "DPM++ 2M Trailing",
+          "DDIM Trailing",
+          "UniPC Trailing",
+          "TCD Trailing"
+        ],
+        "note": "Author guidance from the Tongyi-MAI HF card. Draw Things applies its own recommended preset when --steps/--cfg are omitted; the values this project uses are the ones the on-machine benchmark selected."
+      },
+      "companions_note": "The three quantised variants (q8p, i8x, q6p) share qwen_3_vl_4b_instruct_q8p.ckpt. The f16 (Exact) variant requires qwen_3_vl_4b_instruct_f16.ckpt instead — a separate 8.06 GB download, bringing its total footprint to about 21 GB."
+    }
+  ],
+  "upscalers": [
+    {
+      "id": "lanczos",
+      "name": "Lanczos resample (sharp/libvips)",
+      "source": "built-in, non-generative",
+      "license": "Apache-2.0 (libvips) / MIT (sharp)",
+      "commercial_use_verified": true,
+      "enabled_by_default": true,
+      "note": "Cannot invent detail, therefore cannot invent artefacts. The safe default for mild enlargement."
+    },
+    {
+      "id": "realesrgan-x2",
+      "name": "Real-ESRGAN x2+",
+      "file": "realesrgan_x2plus_f16.ckpt",
+      "source": "Draw Things built-in upscaler zoo",
+      "upstream": "https://github.com/xinntao/Real-ESRGAN",
+      "download_url": "https://static.libnnc.org/realesrgan_x2plus_f16.ckpt",
+      "sha256": "98ce77870b5ca059ec004fe8572182dc67ac8d6a2bba8a938df0ba44fbaccc66",
+      "license": "BSD-3-Clause",
+      "license_source": "Real-ESRGAN upstream repository (UpscalerZoo.swift entry)",
+      "commercial_use_verified": true,
+      "enabled_by_default": false,
+      "kind": "esrgan",
+      "scale": 2,
+      "note": "Invoked through --config-json {\"upscaler\":...}. Draw Things honours only scale factors 2 and 4.",
+      "size_gb": 0.03
+    },
+    {
+      "id": "realesrgan-x4",
+      "name": "Real-ESRGAN x4+",
+      "file": "realesrgan_x4plus_f16.ckpt",
+      "source": "Draw Things built-in upscaler zoo",
+      "upstream": "https://github.com/xinntao/Real-ESRGAN",
+      "download_url": "https://static.libnnc.org/realesrgan_x4plus_f16.ckpt",
+      "sha256": "3db00086d999e590e313dbf45f0701cdf0e3bca3a66a201a3078423501cb58fd",
+      "license": "BSD-3-Clause",
+      "license_source": "Real-ESRGAN upstream repository (UpscalerZoo.swift entry)",
+      "commercial_use_verified": true,
+      "enabled_by_default": false,
+      "kind": "esrgan",
+      "scale": 4,
+      "size_gb": 0.03
+    },
+    {
+      "id": "seedvr2-3b",
+      "name": "SeedVR2 3B",
+      "file": "seedvr2_3b_q8p.ckpt",
+      "source": "Draw Things official model catalog",
+      "upstream": "https://huggingface.co/ByteDance-Seed/SeedVR2-3B",
+      "license": "Apache-2.0",
+      "license_source": "HuggingFace model card metadata (license: apache-2.0)",
+      "commercial_use_verified": true,
+      "enabled_by_default": false,
+      "kind": "generative-restorer",
+      "note": "Not reachable through the `upscaler` config key — Draw Things resolves that exclusively from its built-in upscaler zoo. SeedVR2 runs as an img2img pass over the source image instead (steps 1, strength 1).",
+      "size_gb": 4.91,
+      "companions": [
+        {
+          "file": "seedvr2_vae_f16.ckpt",
+          "role": "autoencoder",
+          "size_gb": 0.47
+        }
+      ]
+    },
+    {
+      "id": "seedvr2-7b",
+      "name": "SeedVR2 7B",
+      "file": "seedvr2_7b_q8p.ckpt",
+      "source": "Draw Things official model catalog",
+      "upstream": "https://huggingface.co/ByteDance-Seed/SeedVR2-7B",
+      "license": "Apache-2.0",
+      "license_source": "HuggingFace model card metadata (license: apache-2.0)",
+      "commercial_use_verified": true,
+      "enabled_by_default": false,
+      "kind": "generative-restorer",
+      "note": "Not reachable through the `upscaler` config key — Draw Things resolves that exclusively from its built-in upscaler zoo. SeedVR2 runs as an img2img pass over the source image instead (steps 1, strength 1).",
+      "size_gb": 11
+    },
+    {
+      "id": "4x-ultrasharp",
+      "name": "4x-UltraSharp",
+      "file": "4x_ultrasharp_f16.ckpt",
+      "source": "Draw Things built-in upscaler zoo",
+      "license": "CC-BY-NC-SA-4.0",
+      "license_source": "upstream model licence (non-commercial)",
+      "commercial_use_verified": false,
+      "enabled_by_default": false,
+      "kind": "esrgan",
+      "rejection_reason": "CC-BY-NC-SA-4.0 forbids commercial use. This project produces company marketing assets, so it is excluded."
+    },
+    {
+      "id": "remacri-4x",
+      "name": "Remacri 4x",
+      "file": "remacri_4x_f16.ckpt",
+      "source": "Draw Things built-in upscaler zoo",
+      "license": "CC-BY-NC-SA-4.0",
+      "license_source": "upstream model licence (non-commercial)",
+      "commercial_use_verified": false,
+      "enabled_by_default": false,
+      "kind": "esrgan",
+      "rejection_reason": "CC-BY-NC-SA-4.0 forbids commercial use. Excluded for the same reason as 4x-UltraSharp."
+    }
+  ],
+  "loras": [
+    {
+      "id": "realistic-snapshot-zit-v5",
+      "name": "Realistic Snapshot (Z-Image-Turbo + Krea 2) — ZIT v5 (Real Life)",
+      "creator": "MonkeyForever",
+      "source": "civitai",
+      "civitai_model_id": 2268008,
+      "civitai_version_id": 2617751,
+      "file": "RealisticSnapshot-Zimage-Turbov5.safetensors",
+      "size_mb": 162,
+      "sha256": "182D7F92475B8D7F792203127738D31270403E86E007FDC7792D324A3406E556",
+      "base_model": "ZImageTurbo",
+      "trigger_words": [],
+      "author_recommended_strength": [
+        0.6,
+        0.7
+      ],
+      "license": "Civitai creator terms",
+      "license_flags": {
+        "allowCommercialUse": [
+          "Image",
+          "RentCivit",
+          "Rent",
+          "Sell"
+        ],
+        "allowNoCredit": true,
+        "allowDerivatives": true,
+        "allowDifferentLicense": true
+      },
+      "commercial_use_verified": true,
+      "license_source": "Civitai API /api/v1/models/2268008, read 2026-08-16",
+      "candidate": "primary",
+      "note": "Author's own release notes emphasise faces/NSFW and earlier versions mention 'different girls', so it must be A/B tested on elderly, family, corporate and product scenes before being trusted, not on portraits alone."
+    },
+    {
+      "id": "realstagram-zimg",
+      "name": "Realstagram (REALSTAGRAM_ZIMG)",
+      "creator": "brandodio",
+      "source": "civitai",
+      "civitai_model_id": 2600698,
+      "civitai_version_id": 2921374,
+      "file": "REALSTAGRAM_ZIMG.safetensors",
+      "size_mb": 324,
+      "sha256": "F48DF7097D62803E7440C7CF2255224A7E9B037356EB31B395867BFAB904BE5F",
+      "base_model": "ZImageTurbo",
+      "trigger_words": [],
+      "author_recommended_strength": [
+        0.2,
+        0.6
+      ],
+      "license": "Civitai creator terms",
+      "license_flags": {
+        "allowCommercialUse": [
+          "Image",
+          "RentCivit",
+          "Rent",
+          "Sell"
+        ],
+        "allowNoCredit": true,
+        "allowDerivatives": true,
+        "allowDifferentLicense": true
+      },
+      "commercial_use_verified": true,
+      "license_source": "Civitai API /api/v1/models/2600698, read 2026-08-16",
+      "candidate": "secondary",
+      "note": "Author describes it as a subtle realism pass that preserves Z-Image's native composition and lighting. Rank 64, BF16. The HuggingFace mirror carries an explicit Apache-2.0 grant and needs no account, which is why this is the LoRA the project can actually test and ship.",
+      "mirror": {
+        "source": "huggingface",
+        "repo": "diobrando0/realstagram-zimg",
+        "url": "https://huggingface.co/diobrando0/realstagram-zimg/resolve/main/REALSTAGRAM_ZIMG.safetensors",
+        "size_bytes": 340220400,
+        "license": "Apache-2.0",
+        "license_source": "HuggingFace model card frontmatter (license: apache-2.0), read 2026-08-16",
+        "requires_token": false
+      }
+    },
+    {
+      "id": "amateur-photography",
+      "name": "Amateur Photography",
+      "creator": "peterkickasspeter",
+      "source": "civitai",
+      "civitai_model_id": 652699,
+      "base_model": "ZImageBase",
+      "license": "Civitai creator terms",
+      "license_flags": {
+        "allowCommercialUse": [
+          "RentCivit"
+        ],
+        "allowNoCredit": false,
+        "allowDerivatives": false,
+        "allowDifferentLicense": true
+      },
+      "commercial_use_verified": false,
+      "license_source": "Civitai API /api/v1/models/652699, read 2026-08-16",
+      "candidate": "rejected",
+      "rejection_reason": "allowCommercialUse does not include \"Image\": commercial use of generated images is not granted. This project is used for company marketing, so it is excluded from the pipeline entirely. Its published Z-Image builds also target Z-Image Base rather than Turbo, and the author's own notes report a strong skin-tone bias."
+    },
+    {
+      "id": "luneva-cinematic",
+      "name": "Midjourney Luneva Cinematic",
+      "creator": "luneva",
+      "source": "civitai",
+      "civitai_model_id": 2185167,
+      "civitai_version_id": 2460437,
+      "file": "ZIT_Midjourney_Luneva_Cinematic_v1_r128.safetensors",
+      "size_mb": 649,
+      "base_model": "ZImageTurbo",
+      "license": "Civitai creator terms",
+      "license_flags": {
+        "allowCommercialUse": [
+          "Image",
+          "RentCivit"
+        ],
+        "allowNoCredit": false,
+        "allowDerivatives": false,
+        "allowDifferentLicense": true
+      },
+      "commercial_use_verified": true,
+      "license_source": "Civitai API /api/v1/models/2185167, read 2026-08-16",
+      "candidate": "optional-style",
+      "note": "Commercial image use is granted but credit is REQUIRED (allowNoCredit=false). Cinematic grading is the opposite of this project's goal, so it is never a realism default. Supported only as an explicit opt-in style."
+    },
+    {
+      "id": "luneva-cyber-hd",
+      "name": "Luneva Cyber + HD Enhancer",
+      "creator": "luneva",
+      "source": "civitai",
+      "civitai_model_id": 2215818,
+      "civitai_version_id": 2494657,
+      "file": "ZIT_Luneva CyberHD.safetensors",
+      "size_mb": 649,
+      "base_model": "ZImageTurbo",
+      "license": "Civitai creator terms",
+      "license_flags": {
+        "allowCommercialUse": [
+          "Image",
+          "RentCivit"
+        ],
+        "allowNoCredit": false,
+        "allowDerivatives": false,
+        "allowDifferentLicense": true
+      },
+      "commercial_use_verified": true,
+      "license_source": "Civitai API /api/v1/models/2215818, read 2026-08-16",
+      "candidate": "not-recommended",
+      "note": "Strong sci-fi/PBR stylisation. Turning doctors and families into that aesthetic is precisely the failure mode this project exists to avoid. Not installed."
+    }
+  ]
+}

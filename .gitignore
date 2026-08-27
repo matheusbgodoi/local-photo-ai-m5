@@ -1,0 +1,61 @@
+# --- secrets -------------------------------------------------------------
+.env
+.env.local
+*.token
+secrets/
+
+# --- model weights (NEVER commit) ----------------------------------------
+models/
+loras/
+upscalers/
+weights/
+*.ckpt
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.pth
+*.onnx
+*.mlmodelc/
+
+# --- generated imagery ---------------------------------------------------
+outputs/
+generated/
+.local-photo/
+bench/results/
+bench/out/
+tmp/
+*.png.json.bak
+
+# --- build / deps --------------------------------------------------------
+node_modules/
+dist/
+*.tsbuildinfo
+.playwright/
+.cache/
+
+# --- logs ----------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+
+# --- macOS ---------------------------------------------------------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# --- editors -------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+
+# --- demo scratch --------------------------------------------------------
+examples/**/assets/*.jpg
+examples/**/assets/*.png
+examples/**/assets/*.webp
+
+# stray artefacts other tools drop in the working directory
+dtidx.json
+ui.json
+wiki_so.html

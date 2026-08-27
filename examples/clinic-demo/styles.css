@@ -1,0 +1,187 @@
+/* Clínica Aurora — demonstration template.
+   Fictional. Deliberately restrained, because the photograph is the asset
+   being tested and heavy design would hide it. */
+
+:root {
+  --ink: #10231f;
+  --ink-soft: #4a5c58;
+  --paper: #fbfaf7;
+  --accent: #1f6f63;
+  --accent-soft: #e4efeb;
+  --radius: 14px;
+  --measure: 34rem;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  min-height: 100vh;
+  padding: clamp(2rem, 6vw, 6rem);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  margin-bottom: 1.5rem;
+}
+
+.lede {
+  color: var(--ink-soft);
+  font-size: clamp(1.02rem, 1.3vw, 1.18rem);
+  line-height: 1.6;
+  max-width: var(--measure);
+  margin-bottom: 2.25rem;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn {
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 0.95rem;
+  font-weight: 550;
+  padding: 0.85rem 1.6rem;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--ghost {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero__media {
+  aspect-ratio: 3 / 2;
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* Soft, believable shadow — the photograph should not look pasted on. */
+  box-shadow: 0 1px 2px rgb(16 35 31 / 6%), 0 18px 44px -18px rgb(16 35 31 / 24%);
+}
+
+.hero__media img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* ── social post, exactly 1080x1350 ───────────────────────────────────── */
+
+.post {
+  height: 1350px;
+  overflow: hidden;
+  position: relative;
+  width: 1080px;
+}
+
+.post__bg,
+.post__scrim {
+  inset: 0;
+  position: absolute;
+}
+
+.post__bg {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* A scrim, not a filter: the photograph's own tonality survives. */
+.post__scrim {
+  background: linear-gradient(
+    to top,
+    rgb(8 26 22 / 88%) 0%,
+    rgb(8 26 22 / 62%) 34%,
+    rgb(8 26 22 / 8%) 62%,
+    rgb(8 26 22 / 0%) 100%
+  );
+}
+
+.post__content {
+  bottom: 0;
+  color: #fff;
+  padding: 88px 80px 96px;
+  position: absolute;
+}
+
+.post__eyebrow {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0.82;
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+
+.post__title {
+  font-size: 96px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin-bottom: 28px;
+}
+
+.post__body {
+  font-size: 32px;
+  line-height: 1.45;
+  max-width: 22ch;
+  opacity: 0.92;
+  margin-bottom: 40px;
+}
+
+.post__cta {
+  background: rgb(255 255 255 / 14%);
+  border: 1px solid rgb(255 255 255 / 26%);
+  border-radius: 999px;
+  display: inline-block;
+  font-size: 26px;
+  font-weight: 550;
+  padding: 16px 32px;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}

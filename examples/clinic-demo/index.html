@@ -1,0 +1,52 @@
+<!doctype html>
+<!--
+  Demonstration only. A fictional clinic — no real company data, branding or
+  assets. Its purpose is to prove the end-to-end workflow:
+
+      image_generate → asset → HTML/CSS → render → 1080x1350 post
+
+  Build it with:
+      ./examples/clinic-demo/build.sh
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clínica Aurora — demonstração</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ── website hero ────────────────────────────────────────────────── -->
+    <header class="hero" id="hero">
+      <div class="hero__copy">
+        <p class="eyebrow">Cuidado continuado</p>
+        <h1>Consultas que cabem<br />no tempo de cada paciente.</h1>
+        <p class="lede">
+          Acompanhamento clínico para adultos e idosos, com a mesma equipe do
+          início ao fim do tratamento.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="#">Agendar consulta</a>
+          <a class="btn btn--ghost" href="#">Conhecer a clínica</a>
+        </div>
+      </div>
+      <figure class="hero__media">
+        <img src="assets/hero.jpg" alt="Médica conversando com paciente idosa em uma clínica" />
+      </figure>
+    </header>
+
+    <!-- ── social post, 1080x1350 ──────────────────────────────────────── -->
+    <section class="post" id="post">
+      <img class="post__bg" src="assets/post.jpg" alt="" />
+      <div class="post__scrim"></div>
+      <div class="post__content">
+        <p class="post__eyebrow">Clínica Aurora</p>
+        <h2 class="post__title">Sua consulta<br />sem pressa.</h2>
+        <p class="post__body">
+          40 minutos por atendimento. A mesma equipe acompanhando você.
+        </p>
+        <span class="post__cta">aurora.clinica</span>
+      </div>
+    </section>
+  </body>
+</html>
